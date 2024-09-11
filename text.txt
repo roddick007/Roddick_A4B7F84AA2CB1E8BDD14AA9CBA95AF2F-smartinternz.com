@@ -1,0 +1,76 @@
+#include <stdio.h>
+#include <string.h>
+
+// Define structure to describe a Hotel
+struct Hotel {
+    char name[100];
+    char address[100];
+    int grade;
+    float avg_room_rent;
+    int number_of_rooms;
+};
+
+// Function to display hotels of a given grade
+void displayByGrade(struct Hotel hotels[], int size, int grade) {
+    printf("Hotels with grade %d:\n", grade);
+    for (int i = 0; i < size; i++) {
+        if (hotels[i].grade == grade) {
+            printf("Name: %s, Address: %s, Avg Room Rent: %.2f, No. of Rooms: %d\n",
+                   hotels[i].name, hotels[i].address, hotels[i].avg_room_rent, hotels[i].number_of_rooms);
+        }
+    }
+}
+
+// Function to display hotels with room rent below a certain value
+void displayByRent(struct Hotel hotels[], int size, float max_rent) {
+    printf("Hotels with room rent less than %.2f:\n", max_rent);
+    for (int i = 0; i < size; i++) {
+        if (hotels[i].avg_room_rent < max_rent) {
+            printf("Name: %s, Address: %s, Grade: %d, Avg Room Rent: %.2f, No. of Rooms: %d\n",
+                   hotels[i].name, hotels[i].address, hotels[i].grade, hotels[i].avg_room_rent, hotels[i].number_of_rooms);
+        }
+    }
+}
+
+int main() {
+    // Array of hotels
+    struct Hotel hotels[5] = {
+        {"Hotel Sunshine", "123 Beach Road", 5, 200.00, 100},
+        {"Mountain View", "456 Hill Street", 4, 150.00, 80},
+        {"City Center", "789 Central Ave", 3, 120.00, 60},
+        {"Budget Inn", "321 Market St", 2, 80.00, 40},
+        {"Luxury Stay", "654 Palm Blvd", 5, 250.00, 150}
+    };
+
+    int choice, grade;
+    float rent;
+
+    // Menu to choose operations
+    while (1) {
+        printf("\nMenu:\n");
+        printf("1. Display hotels by grade\n");
+        printf("2. Display hotels by maximum rent\n");
+        printf("3. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Enter the grade to filter hotels by: ");
+                scanf("%d", &grade);
+                displayByGrade(hotels, 5, grade);
+                break;
+            case 2:
+                printf("Enter the maximum room rent: ");
+                scanf("%f", &rent);
+                displayByRent(hotels, 5, rent);
+                break;
+            case 3:
+                return 0;
+            default:
+                printf("Invalid choice! Try again.\n");
+        }
+    }
+
+    return 0;
+}
