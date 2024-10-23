@@ -1,0 +1,23 @@
+<html>
+<head>
+    <title>Number Formatter</title>
+</head>
+<body>
+    <h1>Numbers Formatter</h1>
+    <p>Enter a number:</p>
+    <input type="text" id="numberInput" />
+    <button onclick="formatNumber()">Format Number</button>
+    <p>Formatted Number: <span id="formattedNumber"></span></p>
+    <script>
+        function formatNumberWithCommas(number) {
+            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        function formatNumber() {
+            const numberInput = document.getElementById('numberInput').value;
+            const formattedNumber = formatNumberWithCommas(numberInput);
+            document.getElementById('formattedNumber').textContent = formattedNumber;
+        }
+    </script>
+</body>
+</html>
